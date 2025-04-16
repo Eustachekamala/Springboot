@@ -39,7 +39,4 @@ This repository documents my journey as I learn and explore Spring Boot, a power
 - [Baeldung Spring Boot Tutorials](https://www.baeldung.com/spring-boot)
 - [Spring Boot in Action by Craig Walls](https://www.manning.com/books/spring-boot-in-action)
 
-## Conclusion
-This journey has been both challenging and rewarding. I look forward to continuing my exploration of Spring Boot and applying it to real-world projects.
-
 Feel free to explore this repository and follow along with my progress!
