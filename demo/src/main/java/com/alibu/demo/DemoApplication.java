@@ -11,6 +11,7 @@ public class DemoApplication {
 
 		FirstService firstService = ctx.getBean(FirstService.class);
 		System.out.println(firstService.tellHistory());
+		System.out.println(firstService.getCustomPropertyFormAnotherFile());
 	}
 
 }
