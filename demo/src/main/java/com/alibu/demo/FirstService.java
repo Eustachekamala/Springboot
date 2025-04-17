@@ -11,14 +11,11 @@ public class FirstService {
 
     private final FirstClass firstClass;
 
-    @Value("Hello Alibu students")
+    @Value("${spring.application.name}")
     private String customProperty;
 
     @Value("${my.prop}")
     private String customPropertyFormAnotherFile;
-
-    @Value("123")
-    private String customPropertyInt;
 
     public FirstService(
            @Qualifier("bean1") FirstClass firstClass) {
@@ -33,7 +30,7 @@ public class FirstService {
         return customPropertyFormAnotherFile;
     }
 
-    public String getCustomPropertyInt() {
-        return customPropertyInt;
+    public String getCustomProperty() {
+        return customProperty;
     }
 }
