@@ -1,9 +1,6 @@
 package com.spring_rest.spring_rest;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class Controller {
@@ -20,5 +17,29 @@ public class Controller {
     @PostMapping(value = "post-order")
     public String postOrder( @RequestBody Order order ) {
         return "Request accepted and message is: " + order.toString();
+    }
+
+    @PostMapping(value = "post-order-record")
+    public String postOrderRecord( @RequestBody OrderRecord order ) {
+        return "Request accepted and message is: " + order.toString();
+    }
+
+    // http://localhost:8080/hello/eustache
+    // @GetMapping("/hello/{user-name}")
+    @GetMapping(value = "/hello/{username}")
+    public String pathVar(
+           @PathVariable String username
+    ) {
+        return "Hello " + username;
+    }
+
+    // http://localhost:8080/hello?param_name=param_value&param_name_2=param_value_2
+    // @GetMapping("/hello/{user-name}")
+    @GetMapping(value = "/hello/param")
+    public String paramVar(
+            @RequestParam("user-name") String username,
+            @RequestParam("user-lastname") String userLastname
+    ) {
+        return "Hello " + username + " " + userLastname;
     }
 }
