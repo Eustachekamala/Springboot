@@ -1,6 +1,7 @@
-package com.spring_jpa.spring_data_jpa;
+package com.spring_jpa.school;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.spring_jpa.student.Student;
 import jakarta.persistence.*;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.spring_jpa.spring_data_jpa;
+package com.spring_jpa.student;
 
 public record StudentDTO(
         String firstname,

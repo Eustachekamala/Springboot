@@ -1,5 +1,6 @@
-package com.spring_jpa.spring_data_jpa;
+package com.spring_jpa.student;
 
+import com.spring_jpa.school.School;
 import org.springframework.stereotype.Service;
 
 @Service

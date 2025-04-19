@@ -1,7 +1,8 @@
-package com.spring_jpa.spring_data_jpa;
+package com.spring_jpa.student;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.spring_jpa.school.School;
+import com.spring_jpa.studentprofile.StudentProfile;
 import jakarta.persistence.*;
 
 @Entity
