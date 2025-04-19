@@ -1,52 +1,20 @@
 package com.spring_jpa.spring_data_jpa;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 public class SchoolController {
+    private SchoolService schoolService;
 
-    private final SchoolRepository schoolRepository;
-
-    public SchoolController(SchoolRepository schoolRepository) {
-        this.schoolRepository = schoolRepository;
+    public SchoolController(SchoolService schoolService) {
+        this.schoolService = schoolService;
     }
 
     @PostMapping("/schools")
     public SchoolResponseDTO create(@RequestBody SchoolDTO schoolDTO) {
-        var school = toSchool(schoolDTO);
-        var schoolSaved = schoolRepository.save(school);
-        return toSchoolResponseDTO(schoolSaved);
-    }
-
-    /**
-     * Converts a SchoolDTO object to a School entity.
-     *
-     * @param dto the SchoolDTO object containing the data to be transformed
-     * @return a School entity populated with the data from the provided SchoolDTO
-     */
-    private School toSchool(SchoolDTO dto) {
-        var school = new School();
-        school.setName(dto.name());
-        school.setAddress(dto.address());
-        school.setEmail(dto.email());
-        school.setPhone(dto.phone());
-        return school;
-    }
-
-    /**
-     * Converts a School entity to a SchoolResponseDTO.
-     *
-     * @param school the School entity to be converted
-     * @return a SchoolResponseDTO containing the name, address, and email of the school
-     */
-    private SchoolResponseDTO toSchoolResponseDTO(School school) {
-        return new SchoolResponseDTO(school.getName(), school.getAddress(), school.getEmail());
+        return schoolService.addSchool(schoolDTO);
     }
 
     /**
@@ -56,9 +24,11 @@ public class SchoolController {
      */
     @GetMapping("/schools")
     public List<SchoolResponseDTO> findAll() {
-        return schoolRepository.findAll()
-                .stream()
-                .map(this::toSchoolResponseDTO)
-                .collect(Collectors.toList());
+       return schoolService.findAllSchool();
+    }
+
+    @PatchMapping("/schools/{id}")
+    public SchoolResponseDTO update(@PathVariable Integer id, @RequestBody SchoolDTO schoolDTO) {
+        return schoolService.updateSchool(id, schoolDTO);
     }
 }

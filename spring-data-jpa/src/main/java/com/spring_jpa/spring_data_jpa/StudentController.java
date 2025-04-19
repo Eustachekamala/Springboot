@@ -7,73 +7,43 @@ import java.util.List;
 
 @RestController
 public class StudentController {
-   private final StudentRepository repository;
+    private StudentService studentService;
 
-    public StudentController(StudentRepository repository) {
-        this.repository = repository;
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
     }
+
     @PostMapping("/students")
-    public StudentResponseDTO post(
+    public StudentResponseDTO saveStudent(
             @RequestBody StudentDTO studentDTO
     ) {
-        var student = toStudent(studentDTO);
-        var sevedStudent = repository.save(student);
-        return toStudentResponseDTO(sevedStudent);
-    }
-
-    /**
-     * Converts a StudentDTO object to a Student entity.
-     *
-     * @param dto the StudentDTO object containing the data to be transformed
-     * @return a Student entity populated with the data from the provided StudentDTO
-     */
-    private Student toStudent(StudentDTO dto) {
-        var student = new Student();
-        student.setFirstname(dto.firstname());
-        student.setLastname(dto.lastname());
-        student.setEmail(dto.email());
-        var school = new School();
-        school.setId(dto.schoolId());
-        student.setSchool(school);
-        return student;
-    }
-
-    /**
-     * Converts a Student entity to a StudentResponseDTO.
-     *
-     * @param student the Student entity to be converted
-     * @return a StudentResponseDTO containing the first name, last name, and email of the student
-     */
-    private StudentResponseDTO toStudentResponseDTO(Student student) {
-        return new StudentResponseDTO(student.getFirstname(), student.getLastname(), student.getEmail());
+        return studentService.saveStudent(studentDTO);
     }
 
     @GetMapping("/students")
-    public List<Student> findAllStudents() {
-        return repository.findAll();
+    public List<StudentResponseDTO> findAllStudents() {
+        return studentService.findAllStudents();
     }
 
     @GetMapping("/student/{id}")
-    public Student findStudentById(
+    public StudentResponseDTO findStudentById(
             @PathVariable("id") Integer id
     ){
-        return repository.findById(id)
-                .orElse(new Student());
+        return studentService.findStudentById(id);
     }
 
     @GetMapping("/students/search/{student-name}")
-    public List<Student> findStudentByName(
+    public List<StudentResponseDTO> findStudentByName(
             @PathVariable("student-name") String studentName
     ){
-        return repository.findAllByFirstnameContaining(studentName);
+        return studentService.findStudentByName(studentName);
     }
 
-
-    @DeleteMapping("/student/{id}")
+    @DeleteMapping("/student/{student-id}")
     @ResponseStatus(HttpStatus.OK)
-    public void deleteStudentById(
-            @PathVariable Integer id
+    public void delete(
+            @PathVariable("student-id") Integer id
     ) {
-        repository.deleteById(id);
+        studentService.deleteStudentById(id);
     }
 }
