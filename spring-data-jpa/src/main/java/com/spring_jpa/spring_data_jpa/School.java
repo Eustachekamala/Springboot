@@ -1,5 +1,6 @@
 package com.spring_jpa.spring_data_jpa;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class School {
     @OneToMany(
             mappedBy = "school"
     )
+    @JsonManagedReference
     private List<Student> students;
 
     public School() {}

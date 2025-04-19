@@ -6,13 +6,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class Controller {
+public class StudentController {
    private final StudentRepository repository;
 
-    public Controller(StudentRepository repository) {
+    public StudentController(StudentRepository repository) {
         this.repository = repository;
     }
-    @PostMapping("/student")
+    @PostMapping("/students")
     public Student post(
             @RequestBody Student student
     ) {
@@ -38,6 +38,7 @@ public class Controller {
     ){
         return repository.findAllByFirstnameContaining(studentName);
     }
+
 
     @DeleteMapping("/student/{id}")
     @ResponseStatus(HttpStatus.OK)

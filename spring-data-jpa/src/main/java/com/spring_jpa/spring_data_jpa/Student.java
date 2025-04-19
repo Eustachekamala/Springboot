@@ -1,5 +1,7 @@
 package com.spring_jpa.spring_data_jpa;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -22,6 +24,8 @@ public class Student {
     @JoinColumn(
             name = "school_id"
     )
+
+    @JsonBackReference
     private School school;
 
     public Student() {
