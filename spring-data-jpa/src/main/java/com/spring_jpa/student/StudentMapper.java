@@ -12,6 +12,9 @@ public class StudentMapper {
      * @return a Student entity populated with the data from the provided StudentDTO
      */
     public Student toStudent(StudentDTO dto) {
+        if (dto == null) {
+            throw  new NullPointerException("The student DTO should not be null");
+        }
         var student = new Student();
         student.setFirstname(dto.firstname());
         student.setLastname(dto.lastname());
