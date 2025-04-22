@@ -2,21 +2,20 @@ package com.eustachecoding.jpa.models;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-
+@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@SuperBuilder
 @Entity
-public class Author {
-    @Id
-    @GeneratedValue
-    private Integer id;
+public class Author extends BaseEntity {
+
     @Column(length = 100)
     private String firstname;
     @Column(length = 100)
@@ -25,11 +24,8 @@ public class Author {
     private String email;
     @Column(nullable = false, length = 100)
     private int age;
-    @Column(updatable = false)
-    private LocalDateTime createdAt;
-    @Column(insertable = false, updatable = false)
-    private LocalDateTime updatedAt;
 
+    //Relationship between author and course table(many authers can write many courses)
     @ManyToMany(mappedBy = "authors")
     private List<Course> courses;
 

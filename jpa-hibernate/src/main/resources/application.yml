@@ -9,3 +9,16 @@ spring:
       ddl-auto: create-drop
     database: postgresql
     show-sql: true
+
+
+#spring:
+#  datasource:
+#    url: jdbc:postgresql://ep-gentle-lake-a4wtbva6-pooler.us-east-1.aws.neon.tech/E-learningDB
+#    username: neondb_owner
+#    password: npg_La03VfhqKiBU
+#    driver-class-name: org.postgresql.Driver
+#  jpa:
+#    hibernate:
+#      ddl-auto: create-drop
+#    database: postgresql
+#    show-sql: true

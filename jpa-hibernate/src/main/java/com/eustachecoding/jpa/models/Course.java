@@ -1,26 +1,23 @@
 package com.eustachecoding.jpa.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@SuperBuilder
 @Entity
-public class Course {
-    @Id
-    @GeneratedValue
-    private Integer id;
+public class Course extends BaseEntity {
     @Column(nullable = false, unique = true)
     private String title;
     private String description;
 
+    //Relationship between course and author table(many courses can be written by many authors)
     @ManyToMany
     @JoinTable(
             name = "authors_courses",
@@ -32,6 +29,8 @@ public class Course {
             }
     )
     private List<Author> authors;
+
+    //Relationship between course and section table(one course can have many section)
     @OneToMany(mappedBy = "course")
     private List<Section> sections;
 }
