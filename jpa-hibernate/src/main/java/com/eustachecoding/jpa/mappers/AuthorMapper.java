@@ -13,7 +13,6 @@ public class AuthorMapper {
         if(dto == null) {
             throw new NullPointerException("The Author DTO should not be  null");
         }
-
         var author = new Author();
         author.setFirstname(dto.firstname());
         author.setLastname(dto.lastname());
@@ -23,6 +22,6 @@ public class AuthorMapper {
 
     //Convert Author entity to AuthorResponseDTO
     public AuthorResponseDTO toAuthorResponseDTO(Author author){
-        return new AuthorResponseDTO(author.getFirstname(), author.getLastname(), author.getEmail());
+        return new AuthorResponseDTO(author.getFirstname(), author.getLastname(), author.getEmail(), author.getAge());
     }
 }

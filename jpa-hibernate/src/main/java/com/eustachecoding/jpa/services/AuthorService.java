@@ -3,7 +3,10 @@ package com.eustachecoding.jpa.services;
 import com.eustachecoding.jpa.dto.AuthorDTO;
 import com.eustachecoding.jpa.dto.AuthorResponseDTO;
 import com.eustachecoding.jpa.mappers.AuthorMapper;
+import com.eustachecoding.jpa.models.Author;
 import com.eustachecoding.jpa.repositories.AuthorRepository;
+import com.eustachecoding.jpa.specification.AuthorSpecification;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,6 +35,14 @@ public class AuthorService {
         return authorRepository.findById(id)
                 .map(authorMapper::toAuthorResponseDTO)
                 .orElse(null);
+    }
+
+    //Get by interval for age less than or equal to 60
+    public List<AuthorResponseDTO> findByNamedQuery(int age) {
+        return authorRepository.findByNamedQuery(age)
+                .stream()
+                .map(authorMapper::toAuthorResponseDTO)
+                .collect(Collectors.toList());
     }
 
     //Get Author by Firstname
@@ -83,5 +94,16 @@ public class AuthorService {
     //Delete Author
     public void deleteAuthor(Integer id) {
         authorRepository.deleteById(id);
+    }
+
+    //Get Author by specification values  e.g. http://localhost:8080/authors/specification?age=65&firstname=Zack
+    public List<AuthorResponseDTO> findBySpecification(int age, String firstname) {
+        Specification<Author> spec = Specification
+                .where(AuthorSpecification.hasAge(age))
+                .or(AuthorSpecification.firstNameLike(firstname));
+        return authorRepository.findAll(spec)
+                .stream()
+                .map(authorMapper::toAuthorResponseDTO)
+                .collect(Collectors.toList());
     }
 }
