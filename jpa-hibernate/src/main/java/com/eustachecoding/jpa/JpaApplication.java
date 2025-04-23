@@ -1,8 +1,10 @@
 package com.eustachecoding.jpa;
 
 import com.eustachecoding.jpa.models.Author;
+import com.eustachecoding.jpa.models.Course;
 import com.eustachecoding.jpa.models.Video;
 import com.eustachecoding.jpa.repositories.AuthorRepository;
+import com.eustachecoding.jpa.repositories.CourseRepository;
 import com.eustachecoding.jpa.repositories.VideoRepository;
 import com.github.javafaker.Faker;
 import org.springframework.boot.CommandLineRunner;
@@ -22,7 +24,8 @@ public class JpaApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(
 			AuthorRepository repository,
-			VideoRepository videoRepository
+			VideoRepository videoRepository,
+			CourseRepository courseRepository
 	) {
 		return args -> {
 			/*for( int i = 0; i < 50; i++ ) {
@@ -43,6 +46,15 @@ public class JpaApplication {
 					.url("https://www.google.com/videos/abc")
 					.build();
 			videoRepository.save(video);*/
+//			for( int i = 0; i < 10; i++ ) {
+//				Faker faker = new Faker();
+//				Course course = Course.builder()
+//						.title(faker.book().title())
+//						.description(faker.book().author())
+//						.build();
+//				courseRepository.save(course);
+//			}
+
 		};
 	}
 
